@@ -1,0 +1,48 @@
+@import "./reset.css";
+
+body {
+    padding: 20px;
+}
+
+div {
+    user-select: none;
+}
+
+.task {
+    border: 1px solid #000;
+    margin-bottom: 20px;
+    padding: 4px 10px;
+}
+
+.addBtn {
+    border: 1px solid #000;
+    margin-left: 20px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.taskList {
+    display: inline-block;
+    width: 100%;
+}
+
+
+.taskList li {
+    margin-bottom: 10px;
+    font-size: 20px;
+    padding: 5px;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.toBeDone {
+    background-color: yellow;
+}
+
+.done {
+    background-color: green;
+}
+

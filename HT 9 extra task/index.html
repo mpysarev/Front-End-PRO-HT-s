@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./script.js" defer></script>
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input type="text" id="task" class="task">
+        <button id="addTaskBtn" class="addBtn">Add task</button>
+    </div>    
+    <ul id="taskList" class="taskList"></ul>
+    
+    
+    <script type="text/template" id="template">
+        <li class="toBeDone">
+            {{task}}
+            <button class="deleteBtn" id="deleteBtn">Delete</button>
+        </li>
+    </script>
+</body>
+</html>
