@@ -9,15 +9,15 @@ console.log(detailsTemplate(person)) // возвращает Alex Smith, phone +
 
 
 
-// function createTemplate(templateString) {
+function createTemplate(templateString) {
 
-//   return function (tempObj) {
+  return function (tempObj) {
     
-//     return Object.keys(tempObj)
-//     .reduce((template, key) => template
-//     .replace(`{{${key}}}`, tempObj[key]), templateString);    
-//   }  
-// }
+    return Object.keys(tempObj)
+    .reduce((template, key) => template
+    .replace(`{{${key}}}`, tempObj[key]), templateString);    
+  }  
+}
 
 
 // function createTemplate(templateString) {
@@ -35,21 +35,21 @@ console.log(detailsTemplate(person)) // возвращает Alex Smith, phone +
 //   };
 // }
 
-function createTemplate(templateString) {
+// function createTemplate(templateString) {
 
-  return function (obj) {
+//   return function (obj) {
     
-    const keys = Object.keys(obj); // ['name']
-    let templateCopy = templateString;
+//     const keys = Object.keys(obj); // ['name']
+//     let templateCopy = templateString;
 
-    keys.forEach(key => {
+//     keys.forEach(key => {
 
-      templateCopy = templateCopy.replace(`{{${key}}}`, obj[key]);
-    });
+//       templateCopy = templateCopy.replace(`{{${key}}}`, obj[key]);
+//     });
 
-    return templateCopy;
-  };
-}
+//     return templateCopy;
+//   };
+// }
 
 
 
