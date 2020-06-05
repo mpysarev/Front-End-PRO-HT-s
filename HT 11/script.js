@@ -13,17 +13,15 @@ const TOPPING_MAYO = {price: 20, callories: 5};
 
 function Burger(size) {
     
-    let toppingList = [];
-
     this.size = size;
-    this.toppings = toppingList;
-    
-    this.addTopping = function(topping) {
-        toppingList.push(topping);
-
-        return toppingList;
-    };
+    this.toppings = [];    
 }
+
+Burger.prototype.addTopping = function(topping) {
+    this.toppings.push(topping);
+
+    return this.toppings;
+};
 
 
 Burger.prototype.getPrice = function() {
