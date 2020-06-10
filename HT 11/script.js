@@ -18,29 +18,22 @@ function Burger(size) {
 }
 
 Burger.prototype.addTopping = function(topping) {
-    this.toppings.push(topping);
-
-    return this.toppings;
+    
+    return this.toppings.push(topping);
 };
 
 
 Burger.prototype.getPrice = function() {
 
-    let result = 
-    this.toppings.reduce((acc, topping) => acc + topping['price'], 0)
-    + this.size['price'];
-    
-    return result;
+    return this.toppings.reduce((acc, topping) => acc + topping['price'], 0)
+    + this.size['price'];    
 }
 
 
 Burger.prototype.getCallories = function() {
 
-    let result = 
-    this.toppings.reduce((acc, topping) => acc + topping['callories'], 0)
-    + this.size['callories'];
-    
-    return result;
+    return this.toppings.reduce((acc, topping) => acc + topping['callories'], 0)
+    + this.size['callories'];    
 }
 
 
