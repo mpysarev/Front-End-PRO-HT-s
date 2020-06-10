@@ -10,16 +10,16 @@ function Accordeon(listEl) {
 
 Accordeon.prototype.onTitleClick = function(e) {
     
-    let bodies = document.getElementsByClassName('body');
-    let activeBody = Array.prototype.find.call(bodies, (body) => body.classList.contains('active'));
+    this.bodies = document.getElementsByClassName('body');
+    this.activeBody = Array.prototype.find.call(this.bodies, (body) => body.classList.contains('active'));
 
     
     if (e.target.className === 'title') {
         e.target.nextElementSibling.classList.toggle('active');
     }
     
-    if(!(activeBody == undefined)) {
-        activeBody.classList.remove('active');
+    if(!(this.activeBody == undefined)) {
+        this.activeBody.classList.remove('active');
     }    
 }
     
