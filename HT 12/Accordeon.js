@@ -1,27 +1,81 @@
 'use strict';
 
-function Accordeon(listEl) {
+function Accordeon(container, config) {
+    this.container = container;
+    this.config = config;
 
-    this.listEl = listEl;
-    
-    listEl.addEventListener('click', this.onTitleClick);    
+    this.init();
 }
 
+Accordeon.ACCORDEON_ELEMENT_CLASS = 'accordeon-element';
+Accordeon.ACCORDEON_HEADING_CLASS = 'accordeon-heading';
+Accordeon.ACCORDEON_BODY_CLASS = 'accordeon-body';
+Accordeon.OPEN_CLASS = 'open';
 
-Accordeon.prototype.onTitleClick = function(e) {
-    
-    this.bodies = document.getElementsByClassName('body');
-    this.activeBody = Array.prototype.find.call(this.bodies, (body) => body.classList.contains('active'));
+Accordeon.prototype.init = function() {
+    this.initClasses();
+    this.bindEventListener();
+}
 
+Accordeon.prototype.initClasses = function() {
+    Array.prototype.forEach.call(this.container.children, (elem) => 
+        elem.classList.add(Accordeon.ACCORDEON_ELEMENT_CLASS)
+    );
     
-    if (e.target.className === 'title') {
-        e.target.nextElementSibling.classList.toggle('active');
+    Array.prototype.forEach.call(this.container.querySelectorAll('.title'),
+        (elem) => elem.classList.add(Accordeon.ACCORDEON_HEADING_CLASS)
+    );
+
+    Array.prototype.forEach.call(this.container.querySelectorAll('.body'),
+        (elem) => elem.classList.add(Accordeon.ACCORDEON_BODY_CLASS)
+    );
+}
+    
+Accordeon.prototype.bindEventListener = function() {
+    this.container.addEventListener('click', (e) => this.onContainerClick(e));
+}
+
+Accordeon.prototype.onContainerClick = function(e) {
+    if (e.target.classList.contains(Accordeon.ACCORDEON_HEADING_CLASS)) {
+        this.toggleElement(e.target.parentNode);
     }
-    
-    if(!(this.activeBody == undefined)) {
-        this.activeBody.classList.remove('active');
-    }    
 }
-    
-    
 
+Accordeon.prototype.toggleElement = function(elem) {
+    if (elem.classList.contains(Accordeon.OPEN_CLASS)) {
+        this.closeElement(elem);
+    } else {
+        this.openElement(elem);
+    }
+}
+
+Accordeon.prototype.closeElement = function(elem) {
+    elem.classList.remove(Accordeon.OPEN_CLASS);
+}
+
+Accordeon.prototype.closeAllElements = function () {
+    Array.prototype.forEach.call(this.container.children, this.closeElement);
+}
+
+Accordeon.prototype.openElement = function(elem) {
+    if (this.config.collapseOther) {
+        this.closeAllElements();
+    }
+
+    elem.classList.add(Accordeon.OPEN_CLASS);
+}
+
+
+
+
+Accordeon.prototype.open = function() {
+    this.openElement(this.container.children[index]);
+}
+
+Accordeon.prototype.close = function() {
+    this.closeElement(this.container.children[index]);
+}
+
+Accordeon.prototype.open = function() {
+    this.toggleElement(this.container.children[index]);
+}
