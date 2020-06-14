@@ -1,0 +1,42 @@
+.container {
+    border: 1px solid #000;
+    padding: 5px;
+    position: relative;
+    min-height: 200px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.tabs-element {
+    display: inline-block;
+}
+
+.tabs-heading {
+    color: black;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 20px;
+}
+
+.tabs-element.open .tabs-heading {
+    background-color: rgb(38, 111, 194);
+    color: white;
+    border-radius: 5px;
+}
+
+.tabs-body {
+    color: black;
+    padding: 15px 7px;
+    background-color: #fff;
+    display: none;
+    top: 45px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+}
+
+.tabs-element.open .tabs-body {
+    display: block;
+}
+

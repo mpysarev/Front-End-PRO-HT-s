@@ -1,0 +1,7 @@
+@import "./reset.css";
+@import "./Tabs.css";
+
+body {
+    padding: 50px;
+}
+
