@@ -3,9 +3,10 @@
 
 class Tabs {
 
-    TABS_ELEMENT_CLASS = 'tabs-element';
-    TABS_HEADING_CLASS = 'tabs-heading';
-    TABS_BODY_CLASS = 'tabs-body';
+    static TABS_ELEMENT_CLASS = 'tabs-element';
+    static TABS_HEADING_CLASS = 'tabs-heading';
+    static TABS_BODY_CLASS = 'tabs-body';
+    static OPEN_CLASS = 'open';
 
     constructor(container) {
         this.container = container;
@@ -21,20 +22,20 @@ class Tabs {
     addClasses() {
 
         Array.prototype.forEach.call(this.container.children, (elem) => 
-            elem.classList.add(this.TABS_ELEMENT_CLASS)
+            elem.classList.add(Tabs.TABS_ELEMENT_CLASS)
         );
         
         Array.prototype.forEach.call(this.container.querySelectorAll('.title'),
-            (elem) => elem.classList.add(this.TABS_HEADING_CLASS)
+            (elem) => elem.classList.add(Tabs.TABS_HEADING_CLASS)
         );
 
         Array.prototype.forEach.call(this.container.querySelectorAll('.body'),
-            (elem) => elem.classList.add(this.TABS_BODY_CLASS)
+            (elem) => elem.classList.add(Tabs.TABS_BODY_CLASS)
         );
         
         Array.prototype.forEach.call(this.container.children, function(elem, index) {
             if (index === 0) {
-                elem.classList.add('open')
+                elem.classList.add(Tabs.OPEN_CLASS)
             }
         });
     }
@@ -44,13 +45,13 @@ class Tabs {
     }
 
     onContainerClick(e) {
-        if (e.target.classList.contains(this.TABS_HEADING_CLASS)) {
+        if (e.target.classList.contains(Tabs.TABS_HEADING_CLASS)) {
             this.openElement(e.target.parentNode);
         }
     }
 
     closeElement(elem) {
-        elem.classList.remove('open');
+        elem.classList.remove(Tabs.OPEN_CLASS);
     }
 
     closeAllElements() {
@@ -60,7 +61,7 @@ class Tabs {
     openElement(elem) {
         this.closeAllElements();
 
-        elem.classList.add('open');
+        elem.classList.add(Tabs.OPEN_CLASS);
     }
 }
 
