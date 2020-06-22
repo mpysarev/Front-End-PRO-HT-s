@@ -1,0 +1,36 @@
+/* @import "./reset.css"; */
+
+body {
+    padding: 20px;
+}
+
+.li {
+    color: black;
+    font-size: 24px;
+    padding: 4px;
+    margin-bottom: 2px;
+    border-radius: 5px;
+    background-color: rgb(99, 138, 95);
+}
+
+
+.albumImg {
+    margin-left: 10px;
+}
+
+
+.albumContainer {
+    max-width: 40%;
+    display: inline-block;
+    margin-right: 40px;
+}
+
+.li:hover {
+    background-color: lightblue;
+}
+
+.photoContainer {
+    max-width: 55%;
+    display: inline-block;
+    vertical-align: top;
+}
