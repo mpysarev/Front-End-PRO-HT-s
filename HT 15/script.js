@@ -8,17 +8,17 @@ let albumId = 1;
 
 const CLASS_LI = 'li';
 const LIST_URL = 'https://jsonplaceholder.typicode.com/albums';
-const FIRST_ALBUM_URL = `https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`;
+const ALBUM_URL = `https://jsonplaceholder.typicode.com/photos?albumId=`;
 
 albumList.addEventListener('click', toggleAlbum);
 
 
-getData();
-getFirstAlbum();
+getAlbumsList();
+displayAlbum(1);
 
   
 
-function getData() {
+function getAlbumsList() {
     fetch(LIST_URL)
     .then(function (res) {
         return res.json();
@@ -28,25 +28,15 @@ function getData() {
     });
 }
 
-function getFirstAlbum() {
 
-    fetch(FIRST_ALBUM_URL)
+function displayAlbum(id) {
+
+    fetch(ALBUM_URL + id)
         .then(function (res) {
             return res.json();
         })
         .then(function(data) {
-            setFirstAlbum(data);
-    });
-}
-
-function changeAlbum(id) {
-
-    fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${id}`)
-        .then(function (res) {
-            return res.json();
-        })
-        .then(function(data) {
-            setNewAlbum(data);
+            setAlbum(data);
     });
 }
 
@@ -56,11 +46,7 @@ function setData(dataArr) {
     dataArr.forEach(generateDataHtml);
 }
 
-function setFirstAlbum(dataArr) {
-    dataArr.forEach(generateAlbumHtml);
-}
-
-function setNewAlbum(dataArr) {
+function setAlbum(dataArr) {
     dataArr.forEach(generateAlbumHtml);
 }
 
@@ -94,13 +80,12 @@ function generateAlbumHtml(dataObj) {
   
 function toggleAlbum (e) {
     const id = e.target.dataset.albumId;
+    
+    displayAlbum(id);
 
-    if (!photoList.hasChildNodes()) {
-        changeAlbum(id);
-    } else {
-      reset(photoList);
-      changeAlbum(id);
-    }
+    if (photoList.hasChildNodes()) {
+        reset(photoList);
+    } 
 }
   
 function reset(list)  {
