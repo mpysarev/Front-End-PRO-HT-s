@@ -2,7 +2,7 @@ const taskInput = document.getElementById('task');
 const addBtn = document.getElementById('addTaskBtn');
 const taskListEl = document.getElementById('taskList');
 
-const templateEl = document.getElementById('template').innerHTML;
+const template = document.getElementById('template').innerHTML;
 
 addBtn.addEventListener('click', onAddBtnClick);
 taskListEl.addEventListener('click', onTaskListClick);
@@ -28,7 +28,7 @@ function onTaskListClick(e) {
 
 function addNewTask(title) {
 
-    taskListEl.innerHTML += templateEl.replace('{{task}}', title);
+    taskListEl.innerHTML += template.replace('{{task}}', title);
 }
 
 

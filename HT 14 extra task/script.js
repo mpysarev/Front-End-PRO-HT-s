@@ -1,32 +1,40 @@
 'use strict';
 
-const listContainer = document.createElement('ul');
+const listContainer = document.getElementById('listContainer');
+const taskInput = document.getElementById('taskInput');
+const addBtn = document.getElementById('addTaskBtn');
 
-const CLASS_CONTAINER = 'container';
+
+const TODO_LIST_URL = 'https://jsonplaceholder.typicode.com/todos';
+
 const CLASS_LI = 'li';
 const CLASS_DELETE = 'delete';
 const CLASS_COMPLETE = 'complete';
 
-document.body.append(listContainer);
 
-listContainer.classList.add(CLASS_CONTAINER);
-
-listContainer.addEventListener('click', toggleElement);
-listContainer.addEventListener('click', deleteElement);
+listContainer.addEventListener('click', onTaskElementClick);
+addBtn.addEventListener('click', onAddBtnClick);
 
 
-fetch('https://jsonplaceholder.typicode.com/todos')
+getData();
+
+
+
+function getData() {
+    fetch(TODO_LIST_URL)
     .then(function (res) {
         return res.json();
     })
     .then(function(data) {
-        getData(data);
+        setData(data);
     });
+}
 
 
-function getData(dataArr) {
+function setData(dataArr) {
     dataArr.forEach(generateHtml);
 }
+
 
 
 function generateHtml(dataObj) {
@@ -38,30 +46,51 @@ function generateHtml(dataObj) {
     todoEl.textContent = dataObj.title;
     deleteBtn.textContent = 'X';
 
-    
-    listContainer.append(todoEl);
-    todoEl.append(deleteBtn);
-
-    addClass(todoEl, dataObj, todoEl, deleteBtn);    
+    appendElement(todoEl, deleteBtn);
+    addClass(todoEl, dataObj, deleteBtn);    
 }
 
 
+function onTaskElementClick(e) {
 
-function addClass(task, obj, li, deleteBtn) {
+    removeElement(e);
+    toggleElement(e);
+}
+
+
+function onAddBtnClick() {
+
+    if(taskInput.value) {
+        const newTask = {};
+
+        newTask.title = taskInput.value;
+        
+        generateHtml(newTask);
+        clearInput();
+    }
+};
+
+
+function appendElement(todoEl, deleteBtn) {
+    listContainer.append(todoEl);
+    todoEl.append(deleteBtn);
+}
+
+function addClass(task, obj, deleteBtn) {
     task.classList.add(CLASS_LI);
     deleteBtn.classList.add(CLASS_DELETE);
 
-    checkStatus(obj, li);
+    checkStatus(obj, task);
 }
 
-function checkStatus(obj, li) {
+function checkStatus(obj, task) {
 
     if(obj.completed) {
-        li.classList.add(CLASS_COMPLETE);
+        task.classList.add(CLASS_COMPLETE);
     } 
 }
 
-function deleteElement(e) {
+function removeElement(e) {
     if(e.target.classList.contains(CLASS_DELETE)) {
         e.target.parentNode.remove();
     }
@@ -70,3 +99,8 @@ function deleteElement(e) {
 function toggleElement(e) {
     e.target.classList.toggle(CLASS_COMPLETE);
 }
+
+function clearInput() {
+    taskInput.value = '';
+}
+
