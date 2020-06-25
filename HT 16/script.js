@@ -11,8 +11,6 @@ const CLASS_LI = 'li';
 const CLASS_DELETE = 'delete';
 const CLASS_COMPLETE = 'complete';
 
-let taskId = 1;
-let deleteBtnId = 1;
 
 
 listContainer.addEventListener('click', onTaskElementClick);
@@ -41,13 +39,10 @@ function onTaskElementClick(e) {
 function onAddBtnClick() {
 
     if(taskInput.value) {
-        const newTask = {completed: false};
-
-        newTask.title = taskInput.value;
+        const newTask = {completed: false, title: taskInput.value};
         
-        generateHtml(newTask);
-        clearInput();
         postTask(newTask);
+        clearInput();
     }
 };
 
@@ -80,7 +75,8 @@ function postTask(newTask) {
         body: JSON.stringify(newTask),
     })
         .then((res) => res.json())
-        .then((data) => console.log(data));    
+        .then((data) => console.log(data))
+        .then(generateHtml(newTask));    
 }
 
 function deleteTask(deleteBtnId) {
@@ -98,7 +94,7 @@ function updateTask(e, taskId) {
 
 function modifyTask(e, taskId, userTask) {
 
-    checkIfComplete(e, userTask);
+    toggleTaskStatus(e, userTask);
 
     fetch(TODO_LIST_URL + '/' + taskId, {
         method: 'PUT',
@@ -110,7 +106,6 @@ function modifyTask(e, taskId, userTask) {
         .then((res) => res.json())
         .then((data) => console.log(data));    
 }
-
 
 
 function setData(dataArr) {
@@ -131,19 +126,21 @@ function generateHtml(dataObj) {
 }
 
 
-
-
 function appendElement(todoEl, deleteBtn) {
     listContainer.prepend(todoEl);
     todoEl.append(deleteBtn);
 }
 
 function addClass(task, obj, deleteBtn) {
-
+    
     task.classList.add(CLASS_LI);
     deleteBtn.classList.add(CLASS_DELETE);
 
-    addAttributes(task, deleteBtn);
+    task.setAttribute('data-task-id', obj.id);
+    deleteBtn.setAttribute('data-deleteBtn-id', obj.id);
+
+
+    // addAttributes(task, deleteBtn);
     checkStatus(obj, task);
 }
 
@@ -154,16 +151,16 @@ function checkStatus(obj, task) {
     } 
 }
 
-function addAttributes(task, deleteBtn) {
-    task.setAttribute('data-task-id', taskId++);
-    deleteBtn.setAttribute('data-deleteBtn-id', deleteBtnId++);
-}
+// function addAttributes(task, deleteBtn) {
+//     task.setAttribute('data-task-id', taskId++);
+//     deleteBtn.setAttribute('data-deleteBtn-id', deleteBtnId++);
+// }
 
 function clearInput() {
     taskInput.value = '';
 }
 
-function checkIfComplete(e, data) {
+function toggleTaskStatus(e, data) {
     if(e.target.classList.contains('complete')) {
         data.completed = true;
     } else {
