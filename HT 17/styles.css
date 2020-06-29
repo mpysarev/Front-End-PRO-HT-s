@@ -1,0 +1,58 @@
+/* @import "./reset.css"; */
+
+body {
+    padding: 50px;
+}
+
+.header {
+    border: 1px solid #000;
+    padding: 10px 5px;
+    user-select: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font: 400 20px serif;
+    margin-bottom: 20px;
+}
+
+.header .addBtn {
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 5px 20px;
+    cursor: pointer;
+}
+
+.stickers-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+    border: 1px solid #000;
+}
+
+.stickers-container .sticker {
+    display: flex;
+    flex-direction: column;
+    max-width: 200px;
+    margin: 10px 5px;
+}
+
+.stickers-container .sticker .head {
+    display: inline-block;
+    border: 1px solid #000;
+    padding: 5px;
+    text-align: center;
+    background-color: rgb(161, 150, 150);
+}
+
+.stickers-container .sticker .body {
+    border: 1px solid #000;
+    display: block;
+    box-sizing: border-box;
+    min-height: 150px;
+    padding: 5px 10px;
+    resize: none;
+}
+
+
+
