@@ -31,14 +31,14 @@ function setData(dataArr) {
 
 function generateHtml(dataObj) {
  
-    const $deleteBtn = `<span class="delete">X</span>`;
-    const $taskNotDone = `<li class="task" data-task-id=${dataObj.id}>${dataObj.title}${$deleteBtn}</li>`;
-    const $taskDone = `<li class="task complete" data-task-id=${dataObj.id}>${dataObj.title}${$deleteBtn}</li>`;
+    const deleteBtn = `<span class="delete">X</span>`;
+    const taskNotDone = `<li class="task" data-task-id=${dataObj.id}>${dataObj.title}${deleteBtn}</li>`;
+    const taskDone = `<li class="task complete" data-task-id=${dataObj.id}>${dataObj.title}${deleteBtn}</li>`;
     
     
     if(dataObj.isDone) {
-        $listContainer.prepend($taskDone);
-    } else {$listContainer.prepend($taskNotDone)};
+        $listContainer.prepend(taskDone);
+    } else {$listContainer.prepend(taskNotDone)};
 }
 
 

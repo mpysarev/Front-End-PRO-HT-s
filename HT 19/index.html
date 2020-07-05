@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="./styles.css">
+    <script src="http://code.jquery.com/jquery-3.5.1.js" 
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" 
+    crossorigin="anonymous" defer>
+    </script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" defer></script>
+    <script src="./script.js" defer></script>
+    <title>Document</title>
+</head>
+<body>
+
+<button id="create-user">Create new user</button>
+<div id="users-contain" class="ui-widget">
+    <h1>Existing Users:</h1>
+    <table id="users" class="ui-widget ui-widget-content"></table>
+</div>
+
+
+
+<div id="dialog-form" title="Create new user">
+    <p class="validateTips">All form fields are required.</p>
+   
+    <form>
+      <fieldset>
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" value="" class="text ui-widget-content ui-corner-all">
+        
+        <label for="surname">Surname</label>
+        <input type="text" name="surname" id="surname" value="" class="text ui-widget-content ui-corner-all">
+        
+        <label for="phone">Phone</label>
+        <input type="number" name="phone" id="phone" value="" class="text ui-widget-content ui-corner-all">
+        
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" value="" class="text ui-widget-content ui-corner-all">
+   
+        <!-- Allow form submission with keyboard without duplicating the dialog button -->
+        <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+      </fieldset>
+    </form>
+</div>
+
+
+</body>
+</html>
