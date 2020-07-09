@@ -11,7 +11,7 @@ $( () => {
     const $userPhone = $('#phone')
     const $userEmail = $('#email')
 
-    $userList.on('click', '.deleteUser', removeTask);
+    $userList.on('click', '.deleteUser', removeUser);
 
 
     getData();
@@ -52,11 +52,11 @@ $( () => {
         $userList.prepend(user);
     }
 
-    function removeTask() {
+    function removeUser() {
 
         $(this).parent().parent().parent().remove();
 
-        deleteTask($(this).parent().parent().parent().data("userId"));
+        deleteUser($(this).parent().parent().parent().data('userId'));
     }
 
 
@@ -72,22 +72,22 @@ $( () => {
                         .add(surname)
                         .add(phone)
                         .add(email),
-        tips = $(".validateTips");
+        tips = $('.validateTips');
     
     function updateTips(t) {
         tips
         .text(t)
-        .addClass("ui-state-highlight");
+        .addClass('ui-state-highlight');
         setTimeout(function() {
-        tips.removeClass( "ui-state-highlight", 1500 );
+        tips.removeClass( 'ui-state-highlight', 1500 );
         }, 500 );
     }
     
     function checkLength( o, n, min, max ) {
         if ( o.val().length > max || o.val().length < min ) {
-        o.addClass( "ui-state-error" );
-        updateTips( "Length of " + n + " must be between " +
-            min + " and " + max + "." );
+        o.addClass( 'ui-state-error' );
+        updateTips( 'Length of ' + n + ' must be between ' +
+            min + ' and ' + max + '.' );
         return false;
         } else {
         return true;
@@ -96,7 +96,7 @@ $( () => {
     
     function checkRegexp( o, regexp, n ) {
         if ( !( regexp.test( o.val() ) ) ) {
-        o.addClass( "ui-state-error" );
+        o.addClass( 'ui-state-error' );
         updateTips( n );
         return false;
         } else {
@@ -106,17 +106,17 @@ $( () => {
     
     function addUser() {
         var valid = true;
-        allFields.removeClass( "ui-state-error" );
+        allFields.removeClass( 'ui-state-error' );
     
-        valid = valid && checkLength( name, "username", 3, 16 );
-        valid = valid && checkLength( surname, "usersurname", 3, 16 );
-        valid = valid && checkLength( phone, "phone", 5, 16 );
-        valid = valid && checkLength( email, "email", 6, 80 );
+        valid = valid && checkLength( name, 'username', 3, 16 );
+        valid = valid && checkLength( surname, 'usersurname', 3, 16 );
+        valid = valid && checkLength( phone, 'phone', 5, 16 );
+        valid = valid && checkLength( email, 'email', 6, 80 );
     
-        valid = valid && checkRegexp( name, /^[a-z]([0-9a-z_\s])+$/i, "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
-        valid = valid && checkRegexp( surname, /^[a-z]([0-9a-z_\s])+$/i, "Usersurname may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
-        valid = valid && checkRegexp( phone, /^([0-9a-zA-Z])+$/, "Phone field only allow : 0-9" );
-        valid = valid && checkRegexp( email, emailRegex, "eg. ui@jquery.com" );
+        valid = valid && checkRegexp( name, /^[a-z]([0-9a-z_\s])+$/i, 'Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter.' );
+        valid = valid && checkRegexp( surname, /^[a-z]([0-9a-z_\s])+$/i, 'Usersurname may consist of a-z, 0-9, underscores, spaces and must begin with a letter.' );
+        valid = valid && checkRegexp( phone, /^([0-9a-zA-Z])+$/, 'Phone field only allow : 0-9' );
+        valid = valid && checkRegexp( email, emailRegex, 'eg. ui@jquery.com' );
     
         if (valid) {
             
@@ -125,41 +125,41 @@ $( () => {
                         phone: $userPhone.val(),
                         email: $userEmail.val()};
 
-        postTask(newUser);
+        postUser(newUser);
 
-        dialog.dialog( "close" );
+        dialog.dialog( 'close' );
         }
         return valid;
     }
     
-    dialog = $( "#dialog-form" ).dialog({
+    dialog = $( '#dialog-form' ).dialog({
         autoOpen: false,
         height: 400,
         width: 350,
         modal: true,
         buttons: {
-            "Create an account": addUser,
+            'Create an account': addUser,
             Cancel: function() {
-                dialog.dialog("close");
+                dialog.dialog('close');
             }
         },
         close: function() {
         form[0].reset();
-        allFields.removeClass( "ui-state-error" );
+        allFields.removeClass( 'ui-state-error' );
         }
     });
     
-    form = dialog.find( "form" ).on( "submit", function(event) {
+    form = dialog.find( 'form' ).on( 'submit', function(event) {
         event.preventDefault();
         addUser();
     });
     
-    $( "#create-user" ).button().on( "click", function() {
-        dialog.dialog("open");
+    $( '#create-user' ).button().on( 'click', function() {
+        dialog.dialog('open');
     });
     
 
-    function postTask(newUser) {
+    function postUser(newUser) {
         fetch(USER_LIST_URL, {
             method: 'POST',
             headers: {
@@ -171,7 +171,7 @@ $( () => {
             .then((data) => generateHtml(data));
     }
 
-    function deleteTask(id) {
+    function deleteUser(id) {
         fetch(USER_LIST_URL + '/' + id, {
             method: 'DELETE',
         });
