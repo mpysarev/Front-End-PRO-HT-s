@@ -1,0 +1,22 @@
+{
+  "name": "HT-22",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-csso": "^4.0.1",
+    "gulp-uglify-es": "^2.0.0"
+  },
+  "dependencies": {
+    "jquery": "^3.5.1",
+    "jquery-ui": "^1.12.1"
+  }
+}
