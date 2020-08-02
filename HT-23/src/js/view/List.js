@@ -9,6 +9,7 @@ class List {
         this.$taskInput = $taskInput;
 
         this.renderModel = this.renderModel.bind(this);
+
         this.$listEl.on('click', '.delete', this.onDeleteBtnClick.bind(this));
         this.$listEl.on('click', '.task', this.onTaskClick.bind(this))
         this.$addBtn.on('click', this.onAddBtnClick.bind(this))
@@ -37,7 +38,9 @@ class List {
         this.config.onDelete(id);
     }
 
-    onAddBtnClick() {
+    onAddBtnClick(e) {
+
+        e.preventDefault();
         
         const newTask = {
             title: this.$taskInput.val(),

@@ -1,6 +1,6 @@
 class Model {
     constructor(url) {
-        this.baseUrl = url;
+        this.url = url;
     }
 
     setData(data) {
@@ -8,37 +8,22 @@ class Model {
     }
 
     delete() {
-        return fetch(this.baseUrl + '/' + this.id, {
+        return fetch(this.url + '/' + this.id, {
             method: 'DELETE'
         });
     }
 
-    create(newTask) {
-        return fetch(this.baseUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(newTask),
-            })
-                .then((res) => res.json())
-    }
 
-    update(model) {
+    update() {
 
-        if(model.isDone){
-            model.isDone = false;
-        } else if (!model.isDone) {
-            model.isDone = true;
-        }
+        this.isDone = !this.isDone;
 
-
-        return fetch(this.baseUrl + '/' + model.id, {
+        return fetch(this.url + '/' + this.id, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(model),
+            body: JSON.stringify(this),
         })
             .then((res) => res.json())
     }

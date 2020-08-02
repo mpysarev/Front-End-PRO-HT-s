@@ -29,9 +29,22 @@ class Collection {
     }
 
     create(newTask) {
+
         const model = new Model(this.url);
 
-        return model.create(newTask);
+        console.log(this.todoList);
+        console.log(model);
+
+        return fetch(this.url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newTask),
+        })
+            .then((res) => res.json())
+            .then((data) => model.setData(data))
+            .then(() => this.todoList.push(model));
     }
 
     toggleTask(id) {
